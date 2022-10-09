@@ -1,0 +1,16 @@
+.grid-item {
+  /* height: 4rem; */
+  background-color: skyblue;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.grid-item:nth-child(even) {
+  background-color: pink;
+}
+
+body {
+  max-width: 750px;
+  margin: 0 auto;
+  background-color: seashell;
+}
