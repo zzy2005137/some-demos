@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>infinite scroll</title>
+  </head>
+  <body>
+    <script>
+      let width = 200;
+      // first render
+      loadImgs(10);
+
+      function loadImgs(n) {
+        let fragment = new DocumentFragment();
+        // let width = 200;
+        for (let i = 0; i < n; i++) {
+          let img = document.createElement("img");
+          img.setAttribute("loading", "lazy");
+          img.src = `https://placekitten.com/${width + i}`;
+          // img.setAttribute("data-src", `https://placekitten.com/${width + i}`);
+          img.width = "400";
+          img.height = "400";
+          fragment.append(img);
+        }
+        let body = document.querySelector("body");
+        body.append(fragment);
+      }
+
+      // infinite scroll
+      const lastImgObserver = new IntersectionObserver((entries) => {
+        let lastImg = entries[0];
+        if (lastImg.isIntersecting) {
+          console.log("intersecting");
+          loadImgs(5);
+          lastImgObserver.unobserve(lastImg.target); // 解除观察
+          lastImgObserver.observe(document.querySelector("img:last-child")); // 更新观察对象
+        }
+      });
+
+      lastImgObserver.observe(document.querySelector("img:last-child"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片懒加载-loading属性</title>
+  </head>
+  <body>
+    <script>
+      let fragment = new DocumentFragment();
+      let width = 400;
+      for (let i = 0; i < 100; i++) {
+        let img = document.createElement("img");
+        img.setAttribute("loading", "lazy");
+        img.src = `https://placekitten.com/${width + i}`; //获取随机图片
+        img.width = "400";
+        img.height = "400";
+        fragment.append(img);
+      }
+      let body = document.querySelector("body");
+      body.append(fragment);
+    </script>
+  </body>
+</html>
